@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const uuid = require('./helpers/uuid');
-const app = require("./routes")
 
 const app = express();
 const PORT = 3001;
@@ -10,7 +9,7 @@ const PORT = 3001;
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/api", api)
+
 
 app.get("/", (req, res) =>
   res.sendFile(psth.join(__dirname, "./public/index.html"))
