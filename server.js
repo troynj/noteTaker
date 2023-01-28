@@ -46,16 +46,17 @@ app.post("/api/notes", (req, res) => {
 });
 
 app.delete("/api/notes/:id", (req, res) => {
-  console.log("req.params = ", req.params)
-  fs.readFile("./db/db.json", (err, data) => {
-    const parsedData = JSON.parse(data);
-    console.log("Array = ", parsedData)
-    console.log("Ids = ", parsedData[0].note_id)
-    console.log("req params = ", req.params)
-    const outputArr = parsedData.forEach((el) => el.note_id !== req.params);
-    console.log("if ", parsedData[0].note_id, " = ", req.params, " => ", outputArr)
-    // console.log(outputArr)
-  })})
+console.log("req.params = ", req.params)
+})
+
+  // fs.readFile("./db/db.json", (err, data) => {
+  //   const parsedData = JSON.parse(data);
+  //   console.log("Array = ", parsedData)
+  //   console.log("Ids = ", parsedData[0].note_id)
+  //   console.log("req params = ", req.params)
+  //   const outputArr = parsedData.forEach((el) => el.note_id !== req.params);
+  //   console.log("if ", parsedData[0].note_id, " = ", req.params, " => ", outputArr)
+  // })})
 //     fs.writeFile("./db/db.json", JSON.stringify(outputArr, null, 4), (err) =>
 //       err ? console.error(err) : console.info("Data written to file")
 //     );
