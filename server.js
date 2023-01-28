@@ -9,17 +9,6 @@ const PORT = 3001;
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const middleware = (req, res, next) => {
-  // ANSI escape code that instructs the terminal to print in yellow
-  const yellow = '\x1b[33m%s\x1b[0m';
-
-  // Log out the request type and resource
-  console.log(yellow, `${req.method} request to ${req.path}`);
-
-  // Built-in express method to call the next middleware in the stack.
-  next();
-};
-app.use(middleware);
 
 app.get("/", (req, res) =>
   res.sendFile(psth.join(__dirname, "./public/index.html"))
@@ -44,7 +33,7 @@ app.post("/api/notes", (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuid(),
+      id: uuid(),
     };
     fs.readFile("./db/db.json", (err, data) => {
       const parsedData = JSON.parse(data);
@@ -57,22 +46,19 @@ app.post("/api/notes", (req, res) => {
 });
 
 app.delete("/api/notes/:id", (req, res) => {
-console.log("req.params = ", req.params)
-})
-
-  // fs.readFile("./db/db.json", (err, data) => {
-  //   const parsedData = JSON.parse(data);
-  //   console.log("Array = ", parsedData)
-  //   console.log("Ids = ", parsedData[0].note_id)
-  //   console.log("req params = ", req.params)
-  //   const outputArr = parsedData.forEach((el) => el.note_id !== req.params);
-  //   console.log("if ", parsedData[0].note_id, " = ", req.params, " => ", outputArr)
-  // })})
-//     fs.writeFile("./db/db.json", JSON.stringify(outputArr, null, 4), (err) =>
-//       err ? console.error(err) : console.info("Data written to file")
-//     );
-//   });
-// })
+  fs.readFile("./db/db.json", (err, data) => {
+    const parsedData = JSON.parse(data);
+    const outputArr = [];
+    parsedData.filter((el) => {
+      if (el.id !== req.params.id) {
+        outputArr.push(el);
+      }
+    });
+    fs.writeFile("./db/db.json", JSON.stringify(outputArr, null, 4), (err) =>
+      err ? console.error(err) : console.info("Data written to file")
+    );
+  });
+});
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
