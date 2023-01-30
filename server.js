@@ -42,7 +42,7 @@ app.post("/api/notes", (req, res) => {
         err ? console.error(err) : console.info("Data written to file")
       );
     });
-  }
+    res.json(parsedData);  }
 });
 
 app.delete("/api/notes/:id", (req, res) => {
@@ -57,6 +57,7 @@ app.delete("/api/notes/:id", (req, res) => {
     fs.writeFile("./db/db.json", JSON.stringify(outputArr, null, 4), (err) =>
       err ? console.error(err) : console.info("Data written to file")
     );
+    res.json(parsedData)
   });
 });
 
