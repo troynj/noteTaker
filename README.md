@@ -4,12 +4,8 @@
 
 1. [Description](#description)
 2. [Technology](#technology)
-3. [Features](#features)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [About](#about)
-7. [Credits](#credits)
-8. [License](#license)
+3. [About](#about)
+
 
 [Deployed site](https://salty-peak-58024.herokuapp.com/)
 
